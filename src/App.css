@@ -1,38 +1,157 @@
+/* Reset margin và padding cho tất cả các phần tử */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Thiết lập font toàn cục */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f4; /* Màu nền nhẹ cho toàn bộ trang */
+  color: #333; /* Màu chữ tối hơn để dễ đọc */
+  margin: 0;
+  overflow: hidden; /* Ngăn chặn cuộn trang */
+}
+
+/* Căn chỉnh toàn bộ ứng dụng */
 .App {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  position: relative; /* Đảm bảo rằng các phần tử con có thể được căn chỉnh đúng */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Phần nền tối bí ẩn khi đăng nhập thành công */
+.dark-background {
+  position: fixed; /* Đảm bảo nó chiếm toàn bộ viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1c1c1c; /* Màu nền tối bí ẩn */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1; /* Đảm bảo nằm trên các phần tử khác */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Phần chọn camera */
+.camera-selection {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  width: 100%;
+  height: 100%;
+}
+
+/* Các tùy chọn camera */
+.camera-option {
+  background-color: #282c34;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 200px;
+  text-align: center;
   color: white;
 }
 
-.App-link {
+/* Thay đổi màu sắc của các tùy chọn camera khi hover */
+.camera-option:hover {
+  background-color: #61dafb;
+  transform: translateY(-3px); /* Hiệu ứng nâng khi hover */
+}
+
+/* Cải thiện tiêu đề chính */
+.App-header {
+  position: relative;
+  background-color: #282c34;
+  color: white;
+  padding: 20px;
+  border-radius: 15px; /* Thêm border-radius để làm cho các góc của tiêu đề mềm mại hơn */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Thêm đổ bóng để tạo chiều sâu */
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  z-index: 0; /* Đảm bảo tiêu đề nằm dưới lớp nền tối */
+}
+
+/* Cải thiện container đăng nhập */
+.login-container {
+  background-color: rgba(255, 255, 255, 0.9); /* Màu nền trắng nhẹ với độ trong suốt */
+  padding: 40px;
+  border-radius: 15px; /* Các góc mềm mại hơn */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Đổ bóng mềm mại */
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  position: relative; /* Đảm bảo phần tử này nằm trên nền */
+}
+
+/* Cải thiện tiêu đề trong container đăng nhập */
+.login-container h2 {
+  margin-bottom: 20px;
+  font-size: 28px; /* Kích thước chữ tiêu đề lớn hơn */
+  font-weight: bold;
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Cải thiện input container */
+.input-container {
+  margin-bottom: 20px;
+  text-align: left; /* Căn chỉnh nhãn và input sang bên trái */
+}
+
+/* Cải thiện nhãn */
+.input-container label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 18px; /* Kích thước chữ nhãn lớn hơn */
+  color: #666; /* Màu chữ nhãn dễ đọc hơn */
+}
+
+/* Cải thiện input */
+.input-container input {
+  width: 100%;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng chuyển đổi cho border-color và box-shadow */
+}
+
+/* Cải thiện hiệu ứng khi input được focus */
+.input-container input:focus {
+  border-color: #61dafb;
+  box-shadow: 0 0 5px rgba(97, 218, 251, 0.5); /* Hiệu ứng shadow khi focus */
+}
+
+/* Cải thiện nút đăng nhập */
+.login-button {
+  width: 100%;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #61dafb;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Hiệu ứng chuyển đổi cho background-color và transform */
+}
+
+/* Thay đổi màu sắc của nút khi hover */
+.login-button:hover {
+  background-color: #21a1f1;
+  transform: translateY(-3px); /* Hiệu ứng nâng nút khi hover */
 }
