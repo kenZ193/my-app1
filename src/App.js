@@ -1,26 +1,72 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
+// Hàm xử lý đăng nhập
+const handleLogin = (username, password, setError, setLoggedIn) => {
+  // Tài khoản mặc định
+  const defaultUsername = 'admin';
+  const defaultPassword = 'password123';
+
+  if (username === defaultUsername && password === defaultPassword) {
+    setLoggedIn(true); // Cập nhật trạng thái đăng nhập
+    setError('');
+  } else {
+    setError('Tên người dùng hoặc mật khẩu không chính xác.');
+  }
+};
+
 function App() {
+  // Trạng thái để lưu trữ tên người dùng, mật khẩu, thông báo lỗi và trạng thái đăng nhập
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const onSubmit = (event) => {
+    event.preventDefault(); // Ngăn không cho form gửi dữ liệu
+    handleLogin(username, password, setError, setLoggedIn);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src="https://media.istockphoto.com/id/165801610/vector/farm-background.jpg?s=612x612&w=0&k=20&c=ddtdh3bA6kyIyhjZjdGbGFlYXPsCIcJkqMsNGI4471c=" className="App-background" alt="background" />
-        <div className="login-container">
-          <h2>Login</h2>
-          <form>
-            <div className="input-container">
-              <label>Username:</label>
-              <input type="text" placeholder="Enter your username" />
-            </div>
-            <div className="input-container">
-              <label>Password:</label>
-              <input type="password" placeholder="Enter your password" />
-            </div>
-            <button type="submit" className="login-button">Login</button>
-          </form>
+      {loggedIn ? (
+        <div className="dark-background">
+          <div className="camera-selection">
+            <div className="camera-option">Camera 1</div>
+            <div className="camera-option">Camera 2</div>
+            <div className="camera-option">Camera 3</div>
+          </div>
         </div>
-      </header>
+      ) : (
+        <header className="App-header">
+          <div className="App-background"></div>
+          <div className="login-container">
+            <h2>Login</h2>
+            <form onSubmit={onSubmit}>
+              <div className="input-container">
+                <label>Username:</label>
+                <input 
+                  type="text" 
+                  placeholder="Enter your username" 
+                  value={username} 
+                  onChange={(e) => setUsername(e.target.value)} 
+                />
+              </div>
+              <div className="input-container">
+                <label>Password:</label>
+                <input 
+                  type="password" 
+                  placeholder="Enter your password" 
+                  value={password} 
+                  onChange={(e) => setPassword(e.target.value)} 
+                />
+              </div>
+              {error && <p className="error-message">{error}</p>}
+              <button type="submit" className="login-button">Login</button>
+            </form>
+          </div>
+        </header>
+      )}
     </div>
   );
 }
